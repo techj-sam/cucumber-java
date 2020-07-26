@@ -17,7 +17,8 @@ import java.util.List;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = {"step_definitions"},
-        tags = "~@ignore"
+        tags = "~@ignore",
+        dryRun = true
 )
 public class RunCukeTest {
 

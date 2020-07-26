@@ -58,15 +58,13 @@ public class Hooks {
                 driver.manage().window().maximize();
                 break;
 
-            case "firefox":
-//                WebDriverBinaryDownloader.create().downloadLatestBinaryAndConfigure(BrowserType.FIREFOX);
-                WebDriverManager.firefoxdriver().setup();
+            case "firefox"://
+                System.setProperty("webdriver.gecko.driver", driverDirectory + "/geckoFirefox/geckodriver.exe");
                 driver = new FirefoxDriver();
                 break;
 
             case "chromeheadless":
-//                WebDriverBinaryDownloader.create().downloadLatestBinaryAndConfigure(BrowserType.CHROME);
-                WebDriverManager.chromedriver().setup();
+                System.setProperty("webdriver.chrome.driver", driverDirectory + "/chrome/chromedriver.exe");
                 System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
                 chromeOptions.addArguments("headless");
                 chromeOptions.addArguments("window-size=1280x1024");
@@ -80,11 +78,6 @@ public class Hooks {
                 firefoxOptions.addArguments("window-size=1280x1024");
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
-
-            case "ie":
-//                WebDriverBinaryDownloader.create().downloadLatestBinaryAndConfigure(BrowserType.IEXPLORER);
-                driver = new InternetExplorerDriver(firefoxOptions);
-                break;
         }
 
         System.out.println("The Browser used for this test is: " + browser.toUpperCase());
@@ -94,7 +87,7 @@ public class Hooks {
 
     @After
     public void embedScreenshot(Scenario scenario) throws Exception {
-        System.out.println(scenario.getStatus()+"\t"+Arrays.asList(scenario.getSourceTagNames()).toString());
+        System.out.println(scenario.getStatus() + "\t" + Arrays.asList(scenario.getSourceTagNames()).toString());
         if (scenario.isFailed()) {
             try {
                 scenario.write("Current Page URL is " + new URL(driver.getCurrentUrl()));

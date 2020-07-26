@@ -10,7 +10,6 @@ import java.util.logging.Level;
 public class Credentials extends BaseClass {
     String cred;
     public static String username;
-    public LoginSteps loginSteps = new LoginSteps();
     public LoginPage loginPage = new LoginPage(driver);
     public Wait wait = new Wait();
 
@@ -27,36 +26,22 @@ public class Credentials extends BaseClass {
         System.out.println("The test is running on " + cred.toUpperCase() + " Credentials");
         switch (cred.toLowerCase()) {
 
-            case "aman":
-                username = "aman";
-                loginSteps.loginWithCredentials(username, "123456");
+            case "neosoft":
+                username = "samj@neosofttech.com";
+                loginPage.loginWithCredentials(username, "123456");
                 break;
 
-            case "aman1":
-                username = "aman";
-                loginSteps.loginWithCredentials(username, "123456");
+            case "default":
+                username = "Test1234@gmail1.com";
+                loginPage.loginWithCredentials(username, "heaven7*");
                 break;
         }
         return username;
     }
 
-    public void clientLogins(String clientName) {
-        String password = "123456";
 
-        switch (clientName) {
-            case "aman":
-                username = "aman";
-                loginSteps.loginWithCredentials(username, password);
-                break;
 
-            case "aman1":
-                username = "aman";
-                loginSteps.loginWithCredentials(username, password);
-                break;
 
-        }
-
-    }
 
     public static String userNameUsed() {
         return username;

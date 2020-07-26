@@ -8,38 +8,24 @@ import helpers.Wait;
 
 import static org.junit.Assert.assertTrue;
 
+import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import pageobjects.HomePage;
 import pageobjects.LoginPage;
+import util.Credentials;
 
-public class LoginSteps extends BaseClass {
+import java.util.List;
+
+public class LoginSteps extends ObjectClass {
     LoginPage loginPage = new LoginPage(driver);
-    static Wait wait = new Wait();
-    Actions actions = new Actions(driver);
-
-    public void loginWithCredentials(String username, String password) {
-        loginPage.username.sendKeys(username);
-        wait.waitAndSendKeysByElement(loginPage.password, password);
-        wait.waitAndClick(loginPage.signMeInButton);
-    }
+    HomePage homePage=new HomePage(driver);
+    Credentials credentials=new Credentials();
 
     @Given("^I go to Home page$")
     public void iNavigateToHompage() throws Throwable {
         loginPage.navigateToLoginPage();
     }
-
-	
-	@And("^I click on 'SIGN ME IN' button$")
-	public void iClickOnSIGNMEINButton()
-	{
-		loginPage.signMeInButton.click();
-	}
-
-	@Then("^I should still see login page$")
-	public void iShouldStillSeeLoginPage() 
-	{
-		
-	}
 
 	@When("^I enter in 'Password' field value \"([^\"]*)\"$")
 	public void iEnterInPasswordFieldValue(String password)
@@ -50,21 +36,50 @@ public class LoginSteps extends BaseClass {
 	@Then("^I should get message \"([^\"]*)\"$")
 	public void iShouldGetMessage(String message)
 	{
-		assertTrue("UserName Password Validation Failed",loginPage.invalidUserNamePasswordMessage.getText().equals(message));
+//		assertTrue("UserName Password Validation Failed",loginPage.invalidUserNamePasswordMessage.getText().equals(message));
 	}
 
 	@When("I navigate to login page")
 	public void iNavigateToLoginPage() {
-    	wait.waitAndReturnElement(driver.findElement(By.className("login"))).click();
+		wait.waitAndClick(loginPage.signinLink);
 	}
 
 	@And("I enter username as {string}")
 	public void iEnterUsernameAs(String username) {
-    	wait.waitAndReturnElement(driver.findElement(By.id("Email"))).click();
+    	wait.waitAndSendKeysByElement(loginPage.username,username);
 	}
 
 	@And("I enter password as {string}")
 	public void iEnterPasswordAs(String password) {
+    	wait.waitAndSendKeysByElement(loginPage.password,password);
+	}
 
+	@And("I click on Sign-in button")
+	public void iClickOnSignInButton() {
+    	wait.waitAndReturnElement(loginPage.signinButton).click();
+	}
+
+	@Then("I should be able login to the application")
+	public void iShouldBeAbleLoginToTheApplication() {
+    	wait.waitAndReturnElement(homePage.logout);
+	}
+
+	@Then("I should see following error message")
+	public void iShouldSeeFollowingErrorMessage(DataTable errorMessages) {
+    	List<List<String>> errors=errorMessages.cells();
+    	assertTrue("This error message not found "+errors.get(0).get(0)
+				,loginPage.errorMessageDiv.getText().contains(errors.get(0).get(0)));
+	}
+
+	@And("I should not able to login to the application")
+	public void iShouldNotAbleToLoginToTheApplication() {
+    	assertTrue("User might be log in to the application",
+				loginPage.signinLink.isDisplayed());
+	}
+
+	@Given("I login with correct credentials")
+	public void iLoginWithCorrectCredentials() throws InterruptedException {
+		loginPage.navigateToLoginPage();
+		credentials.getCredentials();
 	}
 }

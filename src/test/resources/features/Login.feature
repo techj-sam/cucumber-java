@@ -1,30 +1,27 @@
 @LoginFeature
 Feature: Login functionality
 
-  Background: 
+  Background:
     Given I go to Home page
 
   @test
   Scenario: User should be able to login into the application with correct credentials
     When I navigate to login page
-    And I enter username as ""
-    And I enter password as ""
-    And I click on 'SIGN ME IN' button
-    Then I should still see login page
+    And I enter username as "Test1234@gmail1.com"
+    And I enter password as "heaven7*"
+    And I click on Sign-in button
+    Then I should be able login to the application
 
-  Scenario: I should not be logged in if entered only Password field and cliked sign me in
-    When I enter in 'Password' field value "123456"
-    And I click on 'SIGN ME IN' button
-    Then I should still see login page
+  Scenario Outline: User should not not able to login into the application with incorrect credentials
+    When I navigate to login page
+    And I enter username as "<username>"
+    And I enter password as "<password>"
+    And I click on Sign-in button
+    Then I should see following error message
+      | Authentication failed. |
+    And I should not able to login to the application
 
-  Scenario: I should get Username or password is invalid when entered valid username and incorrect password
-    When I enter in 'Username' field value "aman"
-    And I enter in 'Password' field value "12345678"
-    And I click on 'SIGN ME IN' button
-    Then I should get message "Username or password is invalid"
-
-  Scenario: I should get Username or password is invalid when entered invalid username and correct password
-    When I enter in 'Username' field value "amang"
-    And I enter in 'Password' field value "123456"
-    And I click on 'SIGN ME IN' button
-    Then I should get message "Username or password is invalid"
+    Examples:
+      | username              | password   |
+      | Test1234@gmail.com    | heav678**  |
+      | Test7987979@gmail.com | automate6* |
