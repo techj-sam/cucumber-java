@@ -20,7 +20,7 @@ public class Credentials extends BaseClass {
         if (cred == null) {
             cred = System.getenv("CRED");
             if (cred == null) {
-                cred = "brightlinemanagerqa";
+                cred = "Test1234";
             }
         }
         System.out.println("The test is running on " + cred.toUpperCase() + " Credentials");
@@ -31,7 +31,7 @@ public class Credentials extends BaseClass {
                 loginPage.loginWithCredentials(username, "123456");
                 break;
 
-            case "default":
+            case "test1234":
                 username = "Test1234@gmail1.com";
                 loginPage.loginWithCredentials(username, "heaven7*");
                 break;

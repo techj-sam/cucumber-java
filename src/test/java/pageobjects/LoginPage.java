@@ -35,9 +35,10 @@ public class LoginPage extends BaseClass{
         PageFactory.initElements(driver, this);
     }
 
-    public void loginWithCredentials(String arg0Username, String arg1Password) {
-        username.sendKeys(arg0Username);
-        wait.waitAndSendKeysByElement(password, arg1Password);
+    public void loginWithCredentials(String arg0_Username, String arg1_Password) {
+        wait.waitAndClick(signinLink);
+        username.sendKeys(arg0_Username);
+        wait.waitAndSendKeysByElement(password, arg1_Password);
         signinLink.click();
         wait.waitUntilIsPresent(driver.findElement(By.cssSelector(".logout")));
     }
