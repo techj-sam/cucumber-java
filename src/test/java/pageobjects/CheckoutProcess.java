@@ -14,14 +14,20 @@ public class CheckoutProcess extends BaseClass {
     @FindBy(css=".standard-checkout")
     public WebElement procceedToCheckoutonSummary;
 
-    @FindBy(css="button[type='submit']")
-    public WebElement  submitorProceedToCheckout;
+    @FindBy(xpath="//button/span[contains(text(),'Proceed to checkout')]")
+    public WebElement proceedToCheckout;
 
-    @FindBy(id="cgv")
+    @FindBy(xpath="//button/span[contains(text(),'I confirm my order')]")
+    public WebElement confirmMyOrder;
+
+    @FindBy(xpath="//label[@for='cgv']")
     public WebElement termsofServiceCheckbox;
 
     @FindBy(css=".cheque")
     public WebElement payByCheque;
+
+    @FindBy(css=".alert-success")
+    public WebElement orderSuccessMessage;
 
     public CheckoutProcess(WebDriver driver){
         PageFactory.initElements(driver,this);

@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import pageobjects.CheckoutProcess;
 import pageobjects.ListofItems;
 
+import static org.junit.Assert.assertTrue;
+
 public class CheckoutSteps extends ObjectClass{
     ListofItems listofItems=new ListofItems(driver);
     CheckoutProcess checkoutProcess=new CheckoutProcess(driver);
@@ -36,25 +38,26 @@ public class CheckoutSteps extends ObjectClass{
     }
 
     @Then("I proceed to checkout")
-    public void iProceedToCheckout() {
+    public void iProceedToCheckout() throws InterruptedException {
         wait.waitUntilIsPresent(checkoutProcess.proceedToCheckoutononLayer);
         checkoutProcess.proceedToCheckoutononLayer.click();
     }
 
     @And("I see summary of order and proceed ahead")
-    public void iSeeSummaryOfOrderAndProceedAhead() {
+    public void iSeeSummaryOfOrderAndProceedAhead() throws InterruptedException {
         wait.waitAndClick(checkoutProcess.procceedToCheckoutonSummary);
     }
 
     @And("I confirm address and proceed ahead")
     public void iConfirmAddressAndProceedAhead() {
-        wait.waitAndClick(checkoutProcess.submitorProceedToCheckout);
+        wait.waitAndClick(checkoutProcess.proceedToCheckout);
     }
 
     @And("I agree terms of service and proceed ahead")
     public void iAgreeTermsOfServiceAndProceedAhead() {
-        wait.waitAndClick(checkoutProcess.termsofServiceCheckbox).click();
-        wait.waitAndClick(checkoutProcess.submitorProceedToCheckout);
+        wait.waitUntilIsPresent(checkoutProcess.termsofServiceCheckbox);
+        checkoutProcess.termsofServiceCheckbox.click();
+        wait.waitAndClick(checkoutProcess.proceedToCheckout);
     }
 
 
@@ -65,6 +68,16 @@ public class CheckoutSteps extends ObjectClass{
 
     @Then("I confirm my order")
     public void iConfirmMyOrder() {
-        wait.waitAndClick(checkoutProcess.submitorProceedToCheckout);
+        wait.waitAndClick(checkoutProcess.confirmMyOrder);
+        }
+
+    @And("I can see order completion message")
+    public void iCanSeeOrderCompletionMessage() {
+        assertTrue(wait.waitAndReturnElement(checkoutProcess.orderSuccessMessage).getText().contains("Your order on My Store is complete."));
+    }
+
+    @And("I see that cart is filled with {string} item")
+    public void iSeeThatCartIsFilledWithItem(String itemName) {
+        wait.waitUntilIsPresent(driver.findElement(By.xpath("//*[@class='cart-info']//a[contains(text(),'"+itemName+"')]")));
     }
 }

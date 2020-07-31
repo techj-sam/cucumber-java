@@ -30,6 +30,9 @@ public class LoginPage extends BaseClass{
     @FindBy(css="[title$=\"shopping cart\"]")
     public WebElement myCart;
 
+    @FindBy(id="SubmitCreate")
+    public WebElement createAccount;
+
     public LoginPage(WebDriver driver) {
         driver = this.driver;
         PageFactory.initElements(driver, this);
@@ -39,7 +42,7 @@ public class LoginPage extends BaseClass{
         wait.waitAndClick(signinLink);
         username.sendKeys(arg0_Username);
         wait.waitAndSendKeysByElement(password, arg1_Password);
-        signinLink.click();
+        signinButton.click();
         wait.waitUntilIsPresent(driver.findElement(By.cssSelector(".logout")));
     }
 

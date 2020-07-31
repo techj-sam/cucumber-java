@@ -82,4 +82,10 @@ public class LoginSteps extends ObjectClass {
 		loginPage.navigateToLoginPage();
 		credentials.getCredentials();
 	}
+
+	@Then("I can see sign-in section or create an account section")
+	public void iCanSeeSignInSectionOrCreateAnAccountSection() {
+		wait.waitAndReturnElement(loginPage.signinButton);
+		wait.waitUntilIsPresent(loginPage.createAccount);
+	}
 }
