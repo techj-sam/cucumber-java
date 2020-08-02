@@ -1,5 +1,6 @@
 package step_definitions;
 
+import io.cucumber.datatable.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -7,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import pageobjects.CheckoutProcess;
 import pageobjects.ListofItems;
+
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -72,12 +75,16 @@ public class CheckoutSteps extends ObjectClass{
         }
 
     @And("I can see order completion message")
-    public void iCanSeeOrderCompletionMessage() {
-        assertTrue(wait.waitAndReturnElement(checkoutProcess.orderSuccessMessage).getText().contains("Your order on My Store is complete."));
+    public void iCanSeeOrderCompletionMessage(DataTable message) {
+        List<List<String>> messagetoCheck = message.cells();
+        assertTrue(wait.waitAndReturnElement(checkoutProcess.orderSuccessMessage).getText().contains(messagetoCheck.get(0).get(0)));
     }
 
     @And("I see that cart is filled with {string} item")
     public void iSeeThatCartIsFilledWithItem(String itemName) {
-        wait.waitUntilIsPresent(driver.findElement(By.xpath("//*[@class='cart-info']//a[contains(text(),'"+itemName+"')]")));
+        wait.waitUntilIsPresent(listofItems.cartDetails);
+        actions.moveToElement(listofItems.cartDetails).build().perform();
+        assertTrue("Item is not present in the cart",wait.waitAndReturnElement(
+                driver.findElement(By.xpath("//*[@class='cart-info']//a[contains(text(),'"+itemName+"')]"))).isDisplayed());
     }
 }

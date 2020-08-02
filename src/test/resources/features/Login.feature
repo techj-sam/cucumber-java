@@ -4,7 +4,6 @@ Feature: Login functionality
   Background:
     Given I go to Home page
 
-  @test
   Scenario: User should be able to login into the application with correct credentials
     When I navigate to login page
     And I enter username as "Test1234@gmail1.com"
@@ -12,6 +11,7 @@ Feature: Login functionality
     And I click on Sign-in button
     Then I should be able login to the application
 
+  @LoginValidation
   Scenario Outline: User should not not able to login into the application with incorrect credentials
     When I navigate to login page
     And I enter username as "<username>"

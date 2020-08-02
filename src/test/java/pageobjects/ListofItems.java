@@ -20,6 +20,8 @@ public class ListofItems extends BaseClass {
     @FindBy(css=".ajax_add_to_cart_button")
     public WebElement addToCartonImage;
 
+    @FindBy(css=".shopping_cart")
+    public WebElement cartDetails;
 
     public ListofItems(WebDriver driver){
         PageFactory.initElements(driver,this);
