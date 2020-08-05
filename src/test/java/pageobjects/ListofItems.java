@@ -23,6 +23,9 @@ public class ListofItems extends BaseClass {
     @FindBy(css=".shopping_cart")
     public WebElement cartDetails;
 
+    @FindBy(css="[title='View my shopping cart']")
+    public WebElement viewMyShoppingCart;
+
     public ListofItems(WebDriver driver){
         PageFactory.initElements(driver,this);
     }

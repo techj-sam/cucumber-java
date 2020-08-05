@@ -16,7 +16,7 @@ Feature: Order and Checkout for already registered user
     And I confirm the amount to be paid and select payment option "Pay by cheque"
     Then I confirm my order
     And I can see order completion message
-
+      | Your order on My Store is complete. |
 
 
 

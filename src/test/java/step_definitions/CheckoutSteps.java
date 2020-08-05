@@ -83,7 +83,7 @@ public class CheckoutSteps extends ObjectClass{
     @And("I see that cart is filled with {string} item")
     public void iSeeThatCartIsFilledWithItem(String itemName) {
         wait.waitUntilIsPresent(listofItems.cartDetails);
-        actions.moveToElement(listofItems.cartDetails).build().perform();
+        actions.moveToElement(listofItems.viewMyShoppingCart).build().perform();
         assertTrue("Item is not present in the cart",wait.waitAndReturnElement(
                 driver.findElement(By.xpath("//*[@class='cart-info']//a[contains(text(),'"+itemName+"')]"))).isDisplayed());
     }

@@ -17,8 +17,9 @@ import java.util.List;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = {"step_definitions"},
-        tags = "~@ignore",
-        dryRun = true
+        plugin={"pretty","html: target/Destination"},
+        monochrome = true,
+        tags = "~@ignore"
 )
 public class RunCukeTest {
 
