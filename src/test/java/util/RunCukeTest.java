@@ -17,7 +17,7 @@ import java.util.List;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = {"step_definitions"},
-        plugin={"pretty","html: target/Destination"},
+        plugin={"usage","html: target/Destination"},
         monochrome = true,
         tags = "~@ignore"
 )

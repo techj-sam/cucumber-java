@@ -78,10 +78,21 @@ public class Hooks {
                 firefoxOptions.addArguments("window-size=1280x1024");
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
+
+            case "browserstack":
+//                System.setProperty("webdriver.chrome.driver", driverDirectory + "/chrome/chromedriver.exe");
+                final String USERNAME = "******";
+                final String AUTOMATE_KEY = "************";
+//                final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+                final String gridURL="http://localhost:4444/wd/hub";
+                capabilities.setBrowserName("chrome");
+                capabilities.setCapability("name","Automation Practice Tests");
+                capabilities.setPlatform(Platform.WINDOWS);
+                driver = new RemoteWebDriver(new URL(gridURL), capabilities);
+                break;
         }
 
         System.out.println("The Browser used for this test is: " + browser.toUpperCase());
-
     }
 
 

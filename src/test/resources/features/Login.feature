@@ -6,8 +6,8 @@ Feature: Login functionality
 
   Scenario Outline:: User should be able to login into the application with correct credentials
     When I navigate to login page
-    And I enter username as "Test1234@gmail1.com"
-    And I enter password as "heaven7*"
+    And I enter username as "Test12@gmail7.com"
+    And I enter password as "automate1*"
     And I click on Sign-in button
     Then I should be able login to the application
 
