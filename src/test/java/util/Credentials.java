@@ -32,16 +32,12 @@ public class Credentials extends BaseClass {
                 break;
 
             case "test1234":
-                username = "Test1234@gmail1.com";
-                loginPage.loginWithCredentials(username, "heaven7*");
+                username = "Test12@gmail7.com";
+                loginPage.loginWithCredentials(username, "automate1*");
                 break;
         }
         return username;
     }
-
-
-
-
 
     public static String userNameUsed() {
         return username;

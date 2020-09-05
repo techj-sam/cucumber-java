@@ -79,16 +79,29 @@ public class Hooks {
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
 
-            case "browserstack":
+            case "grid":
 //                System.setProperty("webdriver.chrome.driver", driverDirectory + "/chrome/chromedriver.exe");
-                final String USERNAME = "******";
-                final String AUTOMATE_KEY = "************";
-//                final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
                 final String gridURL="http://localhost:4444/wd/hub";
                 capabilities.setBrowserName("chrome");
                 capabilities.setCapability("name","Automation Practice Tests");
                 capabilities.setPlatform(Platform.WINDOWS);
                 driver = new RemoteWebDriver(new URL(gridURL), capabilities);
+                break;
+
+            case "browserstack":
+                final String USERNAME = "sameer238";
+                final String AUTOMATE_KEY = "zhiDpozspJf7snxaEx4o";
+                final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+
+                DesiredCapabilities caps = new DesiredCapabilities();
+
+                caps.setCapability("os", "Windows");
+                caps.setCapability("os_version", "10");
+                caps.setCapability("browser", "Chrome");
+                caps.setCapability("browser_version", "80");
+                caps.setCapability("name", "Automation Practice Tests");
+
+                driver = new RemoteWebDriver(new URL(URL), caps);
                 break;
         }
 

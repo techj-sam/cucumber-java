@@ -6,14 +6,14 @@ Feature: Login functionality
 
   Scenario Outline:: User should be able to login into the application with correct credentials
     When I navigate to login page
-    And I enter username as "Test12@gmail7.com"
-    And I enter password as "automate1*"
+    And I enter username as "<username>"
+    And I enter password as "<password>"
     And I click on Sign-in button
     Then I should be able login to the application
 
     Examples:
       | username               | password   |
-      | Test1234@gmail1.com    | heaven7*   |
+      | Test12@gmail7.com      | automate1* |
       | Testing8909@gmail2.com | automate6* |
 
   @LoginValidation
