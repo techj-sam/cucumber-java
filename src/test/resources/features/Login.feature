@@ -12,9 +12,9 @@ Feature: Login functionality
     Then I should be able login to the application
 
     Examples:
-      | username               | password   |
-      | Test12@gmail7.com      | automate1* |
-      | Testing8909@gmail2.com | automate6* |
+      | username            | password   |
+      | Test12@gmail7.com   | automate1* |
+      | demotest@gmail1.com | cucumber1* |
 
   @LoginValidation
   Scenario Outline: User should not not able to login into the application with incorrect credentials
